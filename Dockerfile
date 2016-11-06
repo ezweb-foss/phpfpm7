@@ -15,6 +15,13 @@ RUN composer global require "hirak/prestissimo:^0.3"
 
 RUN rm -rf /root/.composer/cache
 
+RUN curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+      "https://caddyserver.com/download/build?os=linux&arch=amd64&features=expires%2Crealip" \
+    | tar --no-same-owner -C /usr/bin/ -xz caddy \
+ && chmod 0755 /usr/bin/caddy \
+ && /usr/bin/caddy -version
+
 WORKDIR /var/www
 
 EXPOSE 9000
