@@ -18,7 +18,7 @@ RUN rm -rf /root/.composer/cache
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/build?os=linux&arch=amd64&features=expires%2Crealip%2Cgit%2Ccors" \
+      "https://caddyserver.com/download/linux/amd64?plugins=http.cors%2Chttp.expires%2Chttp.git%2Chttp.realip" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
  && /usr/bin/caddy -version
