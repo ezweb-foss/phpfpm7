@@ -23,6 +23,8 @@ RUN curl --silent --show-error --fail --location \
  && chmod 0755 /usr/bin/caddy \
  && /usr/bin/caddy -version
 
+RUN apk add --update the_silver_searcher
+
 WORKDIR /var/www
 
 EXPOSE 9000
