@@ -2,6 +2,8 @@ FROM php:7.1-fpm
 
 ENV PHPREDIS_VERSION 3.0.0
 
+RUN apt-get update && apt-get install -y git && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 RUN mkdir -p /usr/src/php/ext/redis \
     && curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
     && echo 'redis' >> /usr/src/php-available-exts \
@@ -12,7 +14,7 @@ RUN mkdir -p /usr/src/php/ext/redis \
 
 RUN curl https://getcomposer.org/installer > composer-setup.php && php composer-setup.php && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
 
-RUN composer global require --prefer-dist "hirak/prestissimo:^0.3"
+RUN composer global require "hirak/prestissimo:^0.3"
 
 RUN rm -rf /root/.composer/cache
 
