@@ -12,7 +12,7 @@ RUN mkdir -p /usr/src/php/ext/redis \
 
 RUN curl https://getcomposer.org/installer > composer-setup.php && php composer-setup.php && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
 
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist
+RUN composer global require --prefer-dist "hirak/prestissimo:^0.3"
 
 RUN rm -rf /root/.composer/cache
 
