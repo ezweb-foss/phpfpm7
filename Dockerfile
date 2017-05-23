@@ -1,4 +1,4 @@
-FROM php:7-fpm-alpine
+FROM php:7.1-fpm
 
 ENV PHPREDIS_VERSION 3.0.0
 
@@ -22,8 +22,6 @@ RUN curl --silent --show-error --fail --location \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
  && /usr/bin/caddy -version
-
-RUN apk add --update the_silver_searcher
 
 WORKDIR /var/www
 
