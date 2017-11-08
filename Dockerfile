@@ -1,6 +1,6 @@
 FROM php:7.1-fpm
 
-ENV PHPREDIS_VERSION 3.0.0
+ENV PHPREDIS_VERSION 3.1.4
 
 RUN apt-get update && apt-get install -y git zip unzip && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -14,16 +14,11 @@ RUN mkdir -p /usr/src/php/ext/redis \
 
 RUN curl https://getcomposer.org/installer > composer-setup.php && php composer-setup.php && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
 
-#RUN composer global require --prefer-source "hirak/prestissimo:^0.3"
+RUN composer global require --prefer-source "hirak/prestissimo:^0.3"
 
-#RUN rm -rf /root/.composer/cache
+RUN rm -rf /root/.composer/cache
 
-RUN curl --silent --show-error --fail --location \
-      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/linux/amd64?plugins=http.cors%2Chttp.expires%2Chttp.git%2Chttp.realip" \
-    | tar --no-same-owner -C /usr/bin/ -xz caddy \
- && chmod 0755 /usr/bin/caddy \
- && /usr/bin/caddy -version
+RUN curl https://getcaddy.com | bash -s personal http.cors,http.expires,http.git,http.grpc,http.realip
 
 WORKDIR /var/www
 
