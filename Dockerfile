@@ -25,7 +25,8 @@ RUN composer global require --prefer-source "hirak/prestissimo:^0.3"
 
 RUN rm -rf /root/.composer/cache
 
-RUN curl https://getcaddy.com | bash -s personal http.cors,http.expires,http.git,http.grpc,http.realip
+RUN curl "https://caddyserver.com/download/linux/amd64?plugins=http.cors,http.expires,http.git,http.grpc,http.realip&license=personal" -o /usr/bin/caddy
+RUN chmod +x /usr/bin/caddy
 
 WORKDIR /var/www
 
