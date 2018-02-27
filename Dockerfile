@@ -17,6 +17,7 @@ RUN mkdir -p /usr/src/php/ext/redis \
     && docker-php-ext-install gd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install opcache \
+    && docker-php-ext-install zip \
     && docker-php-ext-install pcntl
 
 RUN curl https://getcomposer.org/installer > composer-setup.php && php composer-setup.php && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
